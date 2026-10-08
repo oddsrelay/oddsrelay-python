@@ -1,0 +1,46 @@
+{
+  "meta": {
+    "feed_type": "sports",
+    "region": "uk",
+    "odds_format": "decimal",
+    "processed_at": "2026-09-17T02:20:11.103Z",
+    "count": 250,
+    "version": "v2",
+    "next_cursor": "eyJrIjoiQ3JpY2tldCIsImkiOiJjcmlja2V0X21pbm9yX2xlYWd1ZV8yMDI2IiwidCI6MTc4OTYxMTYzMH0="
+  },
+  "data": [
+    {
+      "key": "american_football_american_football",
+      "group": "American Football",
+      "title": "American Football",
+      "description": "American Football (American Football)",
+      "active": true,
+      "has_outrights": false,
+      "regions": [
+        "uk"
+      ],
+      "markets": [
+        "h2h",
+        "handicap_points",
+        "over_under_points"
+      ]
+    },
+    {
+      "key": "american_football_canada_cfl",
+      "group": "American Football",
+      "title": "Canada CFL",
+      "description": "Canada CFL (American Football)",
+      "active": true,
+      "has_outrights": false,
+      "regions": [
+        "uk"
+      ],
+      "markets": [
+        "h2h",
+        "handicap_points",
+        "odd_even",
+        "over_under_points"
+      ]
+    }
+  ]
+}

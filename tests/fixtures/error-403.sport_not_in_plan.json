@@ -1,0 +1,11 @@
+{
+  "error": {
+    "code": "sport_not_in_plan",
+    "message": "'tennis' is not in your plan's sports for standard: 'valid' lists them. GET /v2/usage shows your account's scope.",
+    "request_id": "or_req_00000000000000000000000000000000",
+    "valid": [
+      "horse_racing",
+      "soccer"
+    ]
+  }
+}

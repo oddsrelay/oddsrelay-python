@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": "unknown_event",
+    "message": "No such event 'or_evt_000000000000'.",
+    "request_id": "or_req_00000000000000000000000000000000"
+  }
+}

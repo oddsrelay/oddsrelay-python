@@ -1,0 +1,119 @@
+{
+  "region": "uk",
+  "generated_at": "2026-09-17T02:20:29Z",
+  "products": {
+    "2up": [
+      {
+        "bookmaker": "betmgm",
+        "sport": "soccer",
+        "status": "live"
+      },
+      {
+        "bookmaker": "coral",
+        "sport": "soccer",
+        "status": "live"
+      }
+    ],
+    "bog": [
+      {
+        "bookmaker": "betfred",
+        "sport": "horse_racing",
+        "status": "live"
+      },
+      {
+        "bookmaker": "boylesports",
+        "sport": "horse_racing",
+        "status": "live"
+      }
+    ],
+    "dutching": [
+      {
+        "bookmaker": "7bet",
+        "sport": "american_football",
+        "status": "live"
+      },
+      {
+        "bookmaker": "7bet",
+        "sport": "aussie_rules",
+        "status": "live"
+      }
+    ],
+    "each-way": [
+      {
+        "bookmaker": "7bet",
+        "sport": "horse_racing",
+        "status": "live"
+      },
+      {
+        "bookmaker": "bet600",
+        "sport": "horse_racing",
+        "status": "live"
+      }
+    ],
+    "extra-place": [
+      {
+        "bookmaker": "bet600",
+        "sport": "horse_racing",
+        "status": "live"
+      },
+      {
+        "bookmaker": "betfred",
+        "sport": "horse_racing",
+        "status": "live"
+      }
+    ],
+    "raw": [
+      {
+        "bookmaker": "7bet",
+        "sport": "american_football",
+        "status": "live"
+      },
+      {
+        "bookmaker": "7bet",
+        "sport": "aussie_rules",
+        "status": "live"
+      }
+    ],
+    "standard": [
+      {
+        "bookmaker": "7bet",
+        "sport": "american_football",
+        "status": "live"
+      },
+      {
+        "bookmaker": "7bet",
+        "sport": "aussie_rules",
+        "status": "interrupted_24h"
+      }
+    ]
+  },
+  "markets": {
+    "2up": [
+      "h2h"
+    ],
+    "bog": [
+      "win"
+    ],
+    "dutching": [
+      "btts",
+      "h2h",
+      "totals"
+    ],
+    "each-way": [
+      "each_way"
+    ],
+    "extra-place": [
+      "each_way"
+    ],
+    "raw": [
+      "btts",
+      "h2h",
+      "h2h_lay"
+    ],
+    "standard": [
+      "btts",
+      "h2h",
+      "totals"
+    ]
+  }
+}

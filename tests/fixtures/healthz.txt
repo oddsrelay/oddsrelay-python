@@ -1,0 +1,3 @@
+ok
+boards: 6/6 servable
+liveness only - the feed's health verdict is /v2/health

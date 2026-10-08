@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "feed_type": "raw",
+    "region": "uk",
+    "odds_format": "decimal",
+    "processed_at": "2026-09-17T02:20:58.882Z",
+    "count": 2,
+    "version": "v2",
+    "next_cursor": "eyJrIjoiMjAyNi0wOS0xN1QwMjoyNDowMFoiLCJpIjoib3JfZXZ0X2ZiN2YzNzQyYjY4MSIsInQiOjE3ODk2MTE2NjF9",
+    "total": 1312,
+    "board_version": 1789611660384
+  },
+  "data": [
+    {
+      "id": "or_evt_da71d5873e85",
+      "cluster_id": null,
+      "sport_key": "tennis_itf_women_kyoto_2026",
+      "sport_title": "ITF Women Kyoto 2026",
+      "commence_time": "2026-09-17T02:24:00Z",
+      "home_team": "Natsuki Yoshimoto",
+      "away_team": "Tiana Tian Deng",
+      "bookmakers": [
+        {
+          "key": "bet600",
+          "title": "Bet600",
+          "region": "uk",
+          "last_update": "2026-09-17T02:18:09Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-09-17T02:17:02Z",
+              "outcomes": [
+                {
+                  "name": "Natsuki Yoshimoto",
+                  "price": 1.7
+                },
+                {
+                  "name": "Tiana Tian Deng",
+                  "price": 2.0
+                }
+              ]
+            },
+            {
+              "key": "correct_score",
+              "last_update": "2026-09-17T02:17:02Z",
+              "outcomes": [
+                {
+                  "name": "0 - 2",
+                  "price": 3.0
+                },
+                {
+                  "name": "1 - 2",
+                  "price": 4.75
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "betgoodwin",
+          "title": "BetGoodwin",
+          "region": "uk",
+          "last_update": "2026-09-17T02:18:09Z",
+          "markets": [
+            {
+              "key": "h2h",
+              "last_update": "2026-09-17T02:17:02Z",
+              "outcomes": [
+                {
+                  "name": "Natsuki Yoshimoto",
+                  "price": 1.7
+                },
+                {
+                  "name": "Tiana Tian Deng",
+                  "price": 2.0
+                }
+              ]
+            },
+            {
+              "key": "correct_score",
+              "last_update": "2026-09-17T02:17:02Z",
+              "outcomes": [
+                {
+                  "name": "0 - 2",
+                  "price": 3.0
+                },
+                {
+                  "name": "1 - 2",
+                  "price": 4.75
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

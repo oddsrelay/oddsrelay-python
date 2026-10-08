@@ -1,0 +1,15 @@
+{
+  "error": {
+    "code": "unknown_sport",
+    "message": "Unknown sport 'curling_xyz'. A sport or a competition key: full list: /v2/sports.",
+    "request_id": "or_req_00000000000000000000000000000000",
+    "valid": [
+      "american_football",
+      "aussie_rules",
+      "badminton",
+      "baseball",
+      "basketball",
+      "boxing"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "error": {
+    "code": "insufficient_tokens",
+    "message": "This request costs <cost> tokens and your account has <remaining> left until 1 Oct 2026 00:00 UTC. Add filters (sports, bookmakers, exchanges or markets) to make it cheaper, or upgrade your plan: upgrades apply to this key at once.",
+    "request_id": "or_req_00000000000000000000000000000000",
+    "cost": 0,
+    "remaining": 0,
+    "resets_at": "2026-10-01T00:00:00Z",
+    "plan": "starter",
+    "rate_card": "2026-09",
+    "quote": "add quote=true to price any request for free",
+    "upgrade_url": "https://app.oddsrelay.io/billing"
+  }
+}
