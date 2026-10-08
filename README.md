@@ -25,7 +25,8 @@ client = OddsRelay()  # reads ODDSRELAY_KEY
 
 result = client.odds("standard", region="uk", sports="soccer", markets="h2h")  # soccer is the API's key for football
 for event in result.data["data"]:
-    print(event["commence_time"], event["home_team"], "v", event["away_team"])
+    teams = f"{event['home_team']} v {event['away_team']}" if event.get("home_team") else event.get("event_name")
+    print(event["commence_time"], teams)
 
 print(result.tokens)  # what the call cost and what is left
 ```
@@ -138,8 +139,10 @@ while True:
 
 ## Errors
 
-Everything this package raises is an `OddsRelayError`. A reply the API refuses raises an `APIError` subclass with
-`status`, `code`, `message`, `request_id` and `error` (the whole error object):
+A reply the API refuses raises an `APIError` subclass with `status`, `code`, `message`, `request_id` and `error` (the
+whole error object). `APIError` and `QuoteTooHigh` are both `OddsRelayError`s. Network failures are not wrapped: a
+refused connection or a timeout raises the standard library's `OSError` (such as `urllib.error.URLError`), so a
+long-running loop catches `(OddsRelayError, OSError)`.
 
 | Status | Exception |
 |---|---|
@@ -178,7 +181,8 @@ A header the reply did not carry reads as `None`.
 ## Your key
 
 The key travels only in the `Authorization` header. The client never puts it in a URL, a log line, a `repr` or an
-exception message, and it is not forwarded if a reply ever redirects.
+exception message, and it is not forwarded if a reply ever redirects. Spaces and newlines around the key, common when
+it is read from a file, are dropped.
 
 ## Versions
 

@@ -24,6 +24,7 @@ from oddsrelay import (
     NotFoundError,
     NotModified,
     OddsRelay,
+    OddsRelayError,
     PermissionDeniedError,
     QuoteTooHigh,
     RateLimitError,
@@ -84,7 +85,7 @@ def query(req):
 
 class KeyTests(unittest.TestCase):
     def test_key_from_environment_or_argument(self):
-        with mock.patch.dict(os.environ, {"ODDSRELAY_KEY": "env-key"}):
+        with mock.patch.dict(os.environ, {"ODDSRELAY_KEY": "env-key\n"}):
             c, opener = client(reply(body=fixture("v2-sports.page.json")), key=None)
             c.sports()
             c2, opener2 = client(reply(body=fixture("v2-sports.page.json")))
@@ -94,6 +95,15 @@ class KeyTests(unittest.TestCase):
         # Sent as an unredirected header, so urllib never forwards it on a redirect.
         self.assertIn("Authorization", opener2.requests[0].unredirected_hdrs)
         self.assertNotIn("Authorization", opener2.requests[0].headers)
+
+    def test_key_is_stripped_and_a_bad_key_is_refused_without_echoing_it(self):
+        c, opener = client(reply(body=fixture("v2-sports.page.json")), key=f" {KEY}\r\n")
+        c.sports()
+        self.assertEqual(opener.requests[0].get_header("Authorization"), f"Bearer {KEY}")
+        for bad in (f"{KEY}\nX-Injected: 1", f"{KEY}\x00", f"{KEY} {KEY}", f"{KEY}\u00e9"):
+            with self.subTest(bad=bad.encode("unicode_escape")), self.assertRaises(OddsRelayError) as caught:
+                OddsRelay(bad)
+            self.assertNotIn(KEY, str(caught.exception))
 
     def test_no_key_sends_no_authorization(self):
         with mock.patch.dict(os.environ, {}, clear=True):
@@ -154,8 +164,10 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(query(opener.requests[0])["quote"], "true")
         self.assertEqual(set(result.data), {"cost", "remaining", "rate_card"})
 
-    def test_quote_first_makes_the_call_when_under_max_tokens(self):
-        c, opener = client(reply(body=fixture("v2-odds-type.quote.json")), reply(body=fixture("v2-odds-raw.page.json")))
+    def test_quote_first_makes_the_call_when_cost_equals_max_tokens(self):
+        quote = json.loads(fixture("v2-odds-type.quote.json"))
+        quote["cost"] = 10
+        c, opener = client(reply(body=json.dumps(quote).encode()), reply(body=fixture("v2-odds-raw.page.json")))
         result = c.raw(region="uk", max_tokens=10)
         self.assertEqual([query(r).get("quote") for r in opener.requests], ["true", None])
         self.assertEqual(result.data["meta"]["feed_type"], "raw")
@@ -187,6 +199,14 @@ class TransportTests(unittest.TestCase):
         self.assertFalse(first.not_modified)
         self.assertEqual(again.data, first.data)  # the last body, kept by the client
         self.assertEqual(again.tokens.cost, 0)
+
+    def test_etag_store_drops_the_oldest_url_past_its_size(self):
+        size = oddsrelay._CACHE_SIZE
+        c, opener = client(*[reply(body=b"{}", headers={"ETag": f'"e{i}"'}) for i in range(size + 2)])
+        for i in range(size + 1):
+            c.sports(cursor=i)
+        c.sports(cursor=0)  # pushed out by the URL after it
+        self.assertIsNone(opener.requests[-1].get_header("If-none-match"))
 
     def test_429_waits_retry_after_then_succeeds(self):
         waits = []
@@ -253,11 +273,12 @@ class ErrorTests(unittest.TestCase):
                 self.assertIn(code, str(exc))
 
     def test_empty_502_is_a_server_error_without_code(self):
-        c, _ = client(reply(502, gzipped=False))
+        c, _ = client(reply(502, headers={"X-OddsRelay-Request-Id": "or_req_3"}, gzipped=False))
         with self.assertRaises(ServerError) as caught:
             c.status()
         self.assertIsNone(caught.exception.code)
-        self.assertEqual(str(caught.exception), "HTTP 502")
+        self.assertEqual(caught.exception.request_id, "or_req_3")  # the header is the only request id here
+        self.assertEqual(str(caught.exception), "HTTP 502 (request_id or_req_3)")
 
 
 class ResultTests(unittest.TestCase):

@@ -54,7 +54,7 @@ class Tokens(NamedTuple):
 
 
 class RateLimit(NamedTuple):
-    """The X-RateLimit-* headers: the flood-cap window with fewer requests left. None when absent."""
+    """The X-RateLimit-* headers, for whichever rate window is nearest its limit. None when absent."""
 
     limit: Optional[int]
     remaining: Optional[int]
@@ -122,7 +122,7 @@ class NotModified(Result):
 
 
 class OddsRelayError(Exception):
-    """Base class for every error this package raises."""
+    """Base class for the errors this package raises itself. Network failures stay the standard library's OSError."""
 
 
 class APIError(OddsRelayError, _WithHeaders):
@@ -148,7 +148,7 @@ class AuthenticationError(APIError):
 
 
 class InsufficientTokensError(APIError):
-    """402: the call costs more tokens than the account has left. Nothing was served or spent."""
+    """402: the call costs more tokens than the account has left. No data was returned and no tokens were taken."""
 
     def __init__(self, status: int, error: Dict[str, Any], headers: Message) -> None:
         super().__init__(status, error, headers)
@@ -207,9 +207,8 @@ def _param(value: Any) -> str:
     if isinstance(value, (list, tuple)):
         return ",".join(map(str, value))
     if isinstance(value, datetime):  # naive datetimes are read as UTC, as the API reads them
-        if value.tzinfo:
-            value = value.astimezone(timezone.utc)
-        return value.strftime("%Y-%m-%dT%H:%M:%SZ")
+        moment: datetime = value.astimezone(timezone.utc) if value.tzinfo else value
+        return moment.strftime("%Y-%m-%dT%H:%M:%SZ")
     return str(value)
 
 
@@ -241,7 +240,12 @@ class OddsRelay:
         opener: Optional[urllib.request.OpenerDirector] = None,
         sleep: Callable[[float], Any] = time.sleep,
     ) -> None:
-        self._key = key or os.environ.get("ODDSRELAY_KEY") or None
+        # Stripped, since a key read from a file or a .env often ends in a newline. The check stops http.client
+        # from raising an error whose message would carry the whole key; this message never echoes it.
+        key = (key or os.environ.get("ODDSRELAY_KEY") or "").strip()
+        if key and not re.fullmatch(r"[!-~]+", key):
+            raise OddsRelayError("the API key holds characters an HTTP header cannot carry: copy it again")
+        self._key = key or None
         self.timeout = timeout
         self._opener = opener or urllib.request.build_opener()
         self._sleep = sleep
