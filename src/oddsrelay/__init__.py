@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from email.message import Message
 from typing import Any, Callable, Dict, NamedTuple, Optional, Tuple, Union
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 CONTRACT_VERSION = "2026-07-08"  # info.version of the API description these methods follow
 BASE_URL = "https://api.oddsrelay.io"
 

@@ -4,7 +4,7 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "oddsrelay"
-version = "0.1.0"
+version = "0.1.1"
 description = "The OddsRelay Python client: bookmaker and exchange odds for the UK & Ireland as JSON, standard library only."
 readme = "README.md"
 requires-python = ">=3.9"

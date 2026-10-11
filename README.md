@@ -9,10 +9,14 @@ which serves bookmaker and exchange odds for the UK & Ireland as JSON. Standard 
 pip install oddsrelay
 ```
 
+## Get a key
+
+Sign up at [app.oddsrelay.io/signup](https://app.oddsrelay.io/signup) and copy your key from the dashboard.
+Free gives you 50,000 tokens for 14 days from sign-up, with no card, then no tokens until you choose a plan, on the same key. [Plans and token prices](https://oddsrelay.io/pricing).
+
 ## First call
 
-Sign up at [app.oddsrelay.io](https://app.oddsrelay.io/signup) and copy your key from the dashboard. Put it in
-your environment, never in your code:
+Put your key in your environment, never in your code:
 
 ```sh
 export ODDSRELAY_KEY="your key"
@@ -188,6 +192,16 @@ it is read from a file, are dropped.
 
 `oddsrelay.CONTRACT_VERSION` names the version of the API description these methods follow. The API only adds to
 `/v2`, so new fields and new error codes reach you without an upgrade.
+
+## More from OddsRelay
+
+- [oddsrelay-js](https://github.com/oddsrelay/oddsrelay-js): the JavaScript and TypeScript client, `npm install oddsrelay`
+- [oddsrelay-r](https://github.com/oddsrelay/oddsrelay-r): the R client
+- [oddsrelay-mcp](https://github.com/oddsrelay/oddsrelay-mcp): an MCP server that gives Claude, Cursor and other AI assistants read access, with a token cap
+- [oddsrelay-sheets](https://github.com/oddsrelay/oddsrelay-sheets): formulas and a template spreadsheet for Google Sheets
+- [examples](https://github.com/oddsrelay/examples): short programs to copy, one folder each
+- [Libraries and tools](https://oddsrelay.io/docs/libraries), the [docs](https://oddsrelay.io/docs), the [API reference](https://oddsrelay.io/docs/reference) and the [OpenAPI file](https://api.oddsrelay.io/v2/openapi.json)
+- Contact: hello@oddsrelay.io
 
 ## Licence
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1 (2026-10-11)
+
+README and package page only: the code is the same as 0.1.0.
+
+- A "Get a key" section: where to sign up, and what the Free plan gives you.
+- Links to the other OddsRelay clients, the MCP server, the Google Sheets template, the examples and the docs.
+
 ## 0.1.0 (2026-10-09)
 
 The first version.
