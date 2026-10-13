@@ -13,6 +13,7 @@ pip install oddsrelay
 
 Sign up at [app.oddsrelay.io/signup](https://app.oddsrelay.io/signup) and copy your key from the dashboard.
 Free gives you 50,000 tokens for 14 days from sign-up, with no card, then no tokens until you choose a plan, on the same key. [Plans and token prices](https://oddsrelay.io/pricing).
+Paid plans are for your own use. A product that serves other people runs on Enterprise.
 
 ## First call
 
