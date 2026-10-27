@@ -1,4 +1,5 @@
-"""The OddsRelay Python client: one method per GET route of the OddsRelay API, standard library only."""
+"""The OddsRelay Python client: one method per live-feed data and lookup route of the OddsRelay API,
+standard library only."""
 
 from __future__ import annotations
 

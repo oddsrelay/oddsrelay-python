@@ -1,6 +1,6 @@
 # oddsrelay
 
-The OddsRelay Python client. One method for each GET route of the [OddsRelay API](https://oddsrelay.io/docs),
+The OddsRelay Python client. One method for each live-feed data and lookup route of the [OddsRelay API](https://oddsrelay.io/docs),
 which serves bookmaker and exchange odds for the UK & Ireland as JSON. Standard library only, Python 3.9 and up.
 
 ## Install
@@ -62,6 +62,8 @@ print(client.coverage(region="uk").data["products"].keys())
 | `pricing()` | `GET /v2/pricing` | The token rate card |
 | `openapi()` | `GET /v2/openapi.json` | The API description (keyless) |
 | `healthz()` | `GET /healthz` | A plain-text liveness check (keyless) |
+
+The historical odds routes (`GET /v2/historical/*`) have no method yet.
 
 Each method returns a `Result`. `result.data` is the decoded body, with every field kept, including fields the API
 adds after this release.
